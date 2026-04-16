@@ -223,6 +223,18 @@ class PetugasController extends Controller
     }
 
     /**
+     * Show reset password form
+     */
+    public function showResetPassword(Petugas $petugas)
+    {
+        if (!$petugas->user_id) {
+            return redirect()->route('admin.data.petugas')
+                ->with('error', 'Petugas belum memiliki akun!');
+        }
+        return view('admin.petugas.reset-password', compact('petugas'));
+    }
+
+    /**
      * Reset password for petugas user
      */
     public function resetPassword(Request $request, Petugas $petugas)
@@ -250,17 +262,5 @@ class PetugasController extends Controller
 
         return redirect()->route('admin.data.petugas')
             ->with('success', 'Password berhasil direset!');
-    }
-
-    /**
-     * Show reset password form
-     */
-    public function showResetPassword(Petugas $petugas)
-    {
-        if (!$petugas->user_id) {
-            return redirect()->route('admin.data.petugas')
-                ->with('error', 'Petugas belum memiliki akun!');
-        }
-        return view('admin.petugas.reset-password', compact('petugas'));
     }
 }

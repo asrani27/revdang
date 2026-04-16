@@ -48,8 +48,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/data/petugas/{petugas}', [PetugasController::class, 'destroy'])->name('data.petugas.destroy');
     Route::get('/data/petugas/{petugas}/create-user', [PetugasController::class, 'createUser'])->name('data.petugas.create-user');
     Route::post('/data/petugas/{petugas}/store-user', [PetugasController::class, 'storeUser'])->name('data.petugas.store-user');
-    Route::get('/data/petugas/{petugas}/reset-password', [PetugasController::class, 'showResetPassword'])->name('data.petugas.reset-password');
-    Route::put('/data/petugas/{petugas}/reset-password', [PetugasController::class, 'resetPassword'])->name('data.petugas.reset-password');
+    Route::get('/data/petugas/{petugas}/reset-password', [PetugasController::class, 'showResetPassword'])->name('data.petugas.reset-password.show');
+    Route::put('/data/petugas/{petugas}/reset-password', [PetugasController::class, 'resetPassword'])->name('data.petugas.reset-password.update');
     // Data Master Routes - Pelanggan CRUD
     Route::get('/data/pelanggan', [PelangganController::class, 'index'])->name('data.pelanggan');
     Route::get('/data/pelanggan/create', [PelangganController::class, 'create'])->name('data.pelanggan.create');
@@ -60,8 +60,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/data/pelanggan/{pelanggan}', [PelangganController::class, 'destroy'])->name('data.pelanggan.destroy');
     Route::get('/data/pelanggan/{pelanggan}/create-user', [PelangganController::class, 'createUser'])->name('data.pelanggan.create-user');
     Route::post('/data/pelanggan/{pelanggan}/store-user', [PelangganController::class, 'storeUser'])->name('data.pelanggan.store-user');
-    Route::get('/data/pelanggan/{pelanggan}/reset-password', [PelangganController::class, 'showResetPassword'])->name('data.pelanggan.reset-password');
-    Route::put('/data/pelanggan/{pelanggan}/reset-password', [PelangganController::class, 'resetPassword'])->name('data.pelanggan.reset-password');
+    Route::get('/data/pelanggan/{pelanggan}/reset-password', [PelangganController::class, 'showResetPassword'])->name('data.pelanggan.reset-password.show');
+    Route::put('/data/pelanggan/{pelanggan}/reset-password', [PelangganController::class, 'resetPassword'])->name('data.pelanggan.reset-password.update');
     // Data Master Routes - Gangguan CRUD
     Route::get('/data/gangguan', [GangguanController::class, 'index'])->name('data.gangguan');
     Route::get('/data/gangguan/create', [GangguanController::class, 'create'])->name('data.gangguan.create');
