@@ -38,7 +38,7 @@
 
     <!-- Form -->
     <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
-        <form action="{{ route('admin.data.petugas.reset-password', $petugas->id) }}" method="POST">
+        <form action="{{ route('admin.data.petugas.reset-password.update', $petugas->id) }}" method="POST">
             @csrf
             @method('PUT')
 
