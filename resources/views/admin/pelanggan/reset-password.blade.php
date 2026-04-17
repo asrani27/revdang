@@ -30,7 +30,7 @@
     </div>
 
     <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
-        <form action="{{ route('admin.data.pelanggan.reset-password', $pelanggan->id) }}" method="POST">
+        <form action="{{ route('admin.data.pelanggan.reset-password.update', $pelanggan->id) }}" method="POST">
             @csrf @method('PUT')
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
