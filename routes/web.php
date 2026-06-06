@@ -137,17 +137,21 @@ Route::prefix('petugas')->name('petugas.')->group(function () {
 
 // Pelanggan Routes
 Route::prefix('pelanggan')->name('pelanggan.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pelanggan.dashboard');
-    })->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [App\Http\Controllers\Pelanggan\PelangganController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/pengaduan', function () {
-        return view('pelanggan.pengaduan.index');
-    })->name('pengaduan.index');
-    Route::get('/gangguan', function () {
-        return view('pelanggan.gangguan.index');
-    })->name('gangguan.index');
-    Route::get('/feedback/create', function () {
-        return view('pelanggan.feedback.create');
-    })->name('feedback.create');
+    // Pengaduan Routes
+    Route::get('/pengaduan', [App\Http\Controllers\Pelanggan\PelangganController::class, 'pengaduanIndex'])->name('pengaduan.index');
+    Route::get('/pengaduan/create', [App\Http\Controllers\Pelanggan\PelangganController::class, 'pengaduanCreate'])->name('pengaduan.create');
+    Route::post('/pengaduan', [App\Http\Controllers\Pelanggan\PelangganController::class, 'pengaduanStore'])->name('pengaduan.store');
+    Route::get('/pengaduan/{id}', [App\Http\Controllers\Pelanggan\PelangganController::class, 'pengaduanShow'])->name('pengaduan.show');
+
+    // Gangguan Routes
+    Route::get('/gangguan', [App\Http\Controllers\Pelanggan\PelangganController::class, 'gangguanIndex'])->name('gangguan.index');
+    Route::get('/gangguan/{id}', [App\Http\Controllers\Pelanggan\PelangganController::class, 'gangguanShow'])->name('gangguan.show');
+
+    // Feedback Routes
+    Route::get('/feedback', [App\Http\Controllers\Pelanggan\PelangganController::class, 'feedbackIndex'])->name('feedback.index');
+    Route::get('/feedback/create', [App\Http\Controllers\Pelanggan\PelangganController::class, 'feedbackCreate'])->name('feedback.create');
+    Route::post('/feedback', [App\Http\Controllers\Pelanggan\PelangganController::class, 'feedbackStore'])->name('feedback.store');
 });

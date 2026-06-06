@@ -9,9 +9,10 @@
 </a>
 
 <!-- Data Master -->
-<div class="dropdown" x-data="{ open: false }">
+<div class="dropdown" x-data="{ open: false, isActive: false }">
     <button type="button" @click="open = !open"
-        class="flex items-center justify-between gap-3 w-full px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+        class="flex items-center justify-between gap-3 w-full px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+        :class="isActive ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400' : ''">
         <div class="flex items-center gap-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -24,7 +25,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
     </button>
-    <div x-show="open" x-transition class="pl-4 mt-1 space-y-1" x-cloak>
+    <div x-show="open || isActive" x-transition class="pl-4 mt-1 space-y-1" x-cloak>
         <a href="{{ route('admin.data.users') }}"
             class="menu-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm"
             data-menu="users" data-url="/admin/data/users">
@@ -77,9 +78,10 @@
 </div>
 
 <!-- Laporan -->
-<div class="dropdown" x-data="{ open: false }">
+<div class="dropdown" x-data="{ open: false, isActive: false }">
     <button type="button" @click="open = !open"
-        class="flex items-center justify-between gap-3 w-full px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+        class="flex items-center justify-between gap-3 w-full px-4 py-3 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+        :class="isActive ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400' : ''">
         <div class="flex items-center gap-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -87,12 +89,12 @@
             </svg>
             <span class="font-medium">Laporan</span>
         </div>
-        <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none"
+        <svg class="w-4 h-4 transition-transform duration-200" :class="open || isActive ? 'rotate-180' : ''" fill="none"
             stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
     </button>
-    <div x-show="open" x-transition class="pl-4 mt-1 space-y-1" x-cloak>
+    <div x-show="open || isActive" x-transition class="pl-4 mt-1 space-y-1" x-cloak>
         <a href="{{ route('admin.laporan.user') }}"
             class="menu-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm"
             data-menu="laporan-user" data-url="/admin/laporan/user">
@@ -147,31 +149,38 @@
 <!-- JavaScript for Dynamic Menu Highlighting -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // Get current URL path
-    var currentPath = window.location.pathname;
-    
-    // Get all menu items
-    var menuItems = document.querySelectorAll('.menu-item[data-url]');
-    
-    // Loop through each menu item
-    menuItems.forEach(function(item) {
-        var menuUrl = item.getAttribute('data-url');
+        // Get current URL path
+        var currentPath = window.location.pathname;
         
-        // Check if current path matches the menu URL (exact match or nested routes)
-        if (currentPath === menuUrl || currentPath.startsWith(menuUrl + '/')) {
-            // Set active state
-            item.classList.remove('text-slate-500', 'dark:text-slate-400', 'hover:bg-slate-50', 'dark:hover:bg-slate-700');
-            item.classList.add('bg-yellow-50', 'dark:bg-yellow-900/20', 'text-yellow-600', 'dark:text-yellow-400');
+        // Get all menu items
+        var menuItems = document.querySelectorAll('.menu-item[data-url]');
+        
+        // Loop through each menu item
+        menuItems.forEach(function(item) {
+            var menuUrl = item.getAttribute('data-url');
             
-            // Open parent dropdown
-            var dropdown = item.closest('.dropdown');
-            if (dropdown) {
-                var dropdownButton = dropdown.querySelector('button[x-data]');
-                if (dropdownButton) {
-                    dropdownButton.click();
+            // Check if current path matches the menu URL (exact match or nested routes)
+            if (currentPath === menuUrl || currentPath.startsWith(menuUrl + '/')) {
+                // Set active state
+                item.classList.remove('text-slate-500', 'dark:text-slate-400', 'hover:bg-slate-50', 'dark:hover:bg-slate-700');
+                item.classList.add('bg-yellow-50', 'dark:bg-yellow-900/20', 'text-yellow-600', 'dark:text-yellow-400');
+                
+                // Open parent dropdown by dispatching custom event
+                var dropdown = item.closest('.dropdown');
+                if (dropdown) {
+                    dropdown.dispatchEvent(new CustomEvent('activate-dropdown'));
                 }
             }
-        }
+        });
+        
+        // Listen for activate-dropdown event on all dropdowns
+        document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+            dropdown.addEventListener('activate-dropdown', function() {
+                var button = this.querySelector('button');
+                if (button) {
+                    button.click();
+                }
+            });
+        });
     });
-});
 </script>
