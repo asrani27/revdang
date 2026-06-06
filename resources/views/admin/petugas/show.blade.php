@@ -123,47 +123,8 @@
                     <p class="text-slate-900 dark:text-white font-medium">{{ $petugas->created_at->format('d F Y') }}</p>
                 </div>
             </div>
-
-            <!-- User Account Info -->
-            @if($petugas->user)
-            <div class="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                <h4 class="text-sm font-semibold text-green-700 dark:text-green-400 mb-3">Informasi Akun User</h4>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Username</label>
-                        <p class="text-slate-900 dark:text-white font-medium">{{ $petugas->user->username }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Email</label>
-                        <p class="text-slate-900 dark:text-white font-medium">{{ $petugas->user->email }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Status</label>
-                        <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                            {{ ucfirst($petugas->user->status_akun) }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-            @endif
-
             <!-- Actions -->
             <div class="flex items-center justify-end gap-3 mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
-                @if(!$petugas->user_id)
-                <a href="{{ route('admin.data.petugas.create-user', $petugas->id) }}" class="px-4 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors text-sm font-medium flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-                    </svg>
-                    Buat Akun
-                </a>
-                @else
-                <a href="{{ route('admin.data.petugas.reset-password.show', $petugas->id) }}" class="px-4 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-lg transition-colors text-sm font-medium flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
-                    </svg>
-                    Reset Password
-                </a>
-                @endif
                 <a href="{{ route('admin.data.petugas.edit', $petugas->id) }}" class="px-4 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors text-sm font-medium flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>

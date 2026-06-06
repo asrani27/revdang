@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GangguanController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PenangananController;
@@ -25,9 +26,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Data Master Routes - User CRUD
     Route::get('/data/users', [UserController::class, 'index'])->name('data.users');
