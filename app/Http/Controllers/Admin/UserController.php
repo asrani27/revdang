@@ -73,7 +73,7 @@ class UserController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => $validated['role'],
+            'role' => 'admin', // Always admin for this module
             'status_akun' => $validated['status_akun'],
         ]);
 
@@ -125,7 +125,7 @@ class UserController extends Controller
         $user->username = $validated['username'];
         $user->name = $validated['name'];
         $user->email = $validated['email'];
-        $user->role = $validated['role'];
+        $user->role = 'admin'; // Always admin for this module
         $user->status_akun = $validated['status_akun'];
 
         // Only update password if provided

@@ -82,24 +82,6 @@
                         placeholder="Masukkan nomor telepon">
                 </div>
             </div>
-
-            <!-- User Info (read-only) -->
-            @if($petugas->user)
-            <div class="mt-6 p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                <h4 class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-2">Akun User (Tidak dapat diedit)</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">Username</label>
-                        <p class="text-slate-900 dark:text-white">{{ $petugas->user->username }}</p>
-                    </div>
-                    <div>
-                        <label class="block text-xs text-slate-400 mb-1">Email</label>
-                        <p class="text-slate-900 dark:text-white">{{ $petugas->user->email }}</p>
-                    </div>
-                </div>
-            </div>
-            @endif
-
             <!-- Actions -->
             <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
                 <a href="{{ route('admin.data.petugas') }}" class="px-6 py-2.5 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm font-medium">
