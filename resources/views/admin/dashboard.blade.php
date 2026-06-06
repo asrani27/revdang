@@ -97,33 +97,7 @@
                 </div>
             </div>
             <div class="p-5 lg:p-6">
-                <div class="h-64 lg:h-80 flex items-center justify-center">
-                    <div class="w-full max-w-md">
-                        @if(!empty($monthlyData))
-                        <!-- Simple Bar Chart -->
-                        <div class="flex items-end justify-between h-48 lg:h-56 gap-2 lg:gap-4 px-2">
-                            @foreach($monthlyData as $data)
-                            <div class="flex-1 flex flex-col items-center">
-                                @php
-                                    $height = 5;
-                                    if ($data['count'] > 0) {
-                                        $total = 0;
-                                        foreach($monthlyData as $d) { $total += $d['count']; }
-                                        if ($total > 0) {
-                                            $height = round(($data['count'] / $total) * 100);
-                                        }
-                                    }
-                                @endphp
-                                <div class="w-full bg-yellow-400 rounded-t-lg transition-all duration-300" style="height: {{ $height }}%"></div>
-                                <span class="mt-2 text-xs text-slate-500 dark:text-slate-400">{{ $data['month'] }}</span>
-                            </div>
-                            @endforeach
-                        </div>
-                        @else
-                        <p class="text-center text-slate-500">Tidak ada data</p>
-                        @endif
-                    </div>
-                </div>
+                <div class="h-64 lg:h-80" id="chartContainer"></div>
             </div>
         </div>
 
@@ -292,4 +266,43 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        const monthlyData = @json($monthlyData);
+        
+        const chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            backgroundColor: "transparent",
+            axisX: {
+                labelFontColor: "#64748b",
+                tickColor: "#64748b",
+                lineColor: "#e2e8f0",
+                gridThickness: 0
+            },
+            axisY: {
+                labelFontColor: "#64748b",
+                tickColor: "#64748b",
+                lineColor: "#e2e8f0",
+                gridColor: "#e2e8f0",
+                gridThickness: 1,
+                includeZero: true
+            },
+            data: [{
+                type: "column",
+                color: "#3b82f6",
+                dataPoints: monthlyData.map(item => ({
+                    label: item.month,
+                    y: item.count
+                }))
+            }]
+        });
+        
+        chart.render();
+    });
+</script>
+@endpush
 @endsection
