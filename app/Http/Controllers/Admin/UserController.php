@@ -18,9 +18,11 @@ class UserController extends Controller
     {
         $query = User::query();
 
-        // Filter by role
+        // Filter by role - default to admin if no role parameter
         if ($request->has('role') && $request->role !== '') {
             $query->where('role', $request->role);
+        } else {
+            $query->where('role', 'admin');
         }
 
         // Filter by status
