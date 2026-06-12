@@ -9,38 +9,66 @@
             font-size: 12px;
             margin: 20px;
         }
+
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
             margin-bottom: 20px;
-            border-bottom: 2px solid #333;
             padding-bottom: 10px;
         }
+
+        .header-logo {
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .header-logo img {
+            width: 70px;
+            height: auto;
+        }
+
+        .header-content {
+            flex-grow: 1;
+            text-align: center;
+        }
+
         .header h1 {
             margin: 0;
             font-size: 18px;
         }
+
         .header p {
             margin: 5px 0 0;
             font-size: 11px;
             color: #666;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #333;
             padding: 6px 8px;
             text-align: left;
         }
+
         th {
             background-color: #f0f0f0;
             font-weight: bold;
         }
+
         .text-center {
             text-align: center;
         }
+
+        .text-right {
+            text-align: right;
+        }
+
         .footer {
             margin-top: 20px;
             text-align: center;
@@ -49,10 +77,29 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
-        <h1>{{ $title }}</h1>
-        <p>Dicetak pada: {{ $tanggal }}</p>
+        <div class="header-content">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="text-align: right; border:0px;"> <img src="{{ public_path('logo/bjm.png') }}"
+                            alt="Logo BJM" width="100">
+                    </td>
+                    <td style="text-align: center; border:0px;">
+                        <h1>PT. Banua Jaya Mandiri Banjarmasin</h1>
+                        <p> Jl. Pramuka Km. 6 Gang. Teratai III RT. 07 No. 19
+                            Pemurus Luar Kec. Banjarmasin Timur Kota Banjarmasin</p>
+
+                    </td>
+                    <td style="border:0px;" width="100">
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <h3>{{ $title }}</h3>
+            <p>Dicetak pada: {{ $tanggal }}</p>
+        </div>
     </div>
 
     <table>
