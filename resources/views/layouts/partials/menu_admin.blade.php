@@ -68,6 +68,12 @@
             <span class="w-1 h-1 rounded-full bg-current"></span>
             <span>Data Feedback</span>
         </a>
+        <a href="{{ route('admin.data.biaya') }}"
+            class="menu-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm"
+            data-menu="biaya" data-url="/admin/data/biaya">
+            <span class="w-1 h-1 rounded-full bg-current"></span>
+            <span>Data Biaya</span>
+        </a>
         <a href="{{ route('admin.data.log-aktivitas') }}"
             class="menu-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm"
             data-menu="log-aktivitas" data-url="/admin/data/log-aktivitas">

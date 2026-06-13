@@ -10,7 +10,7 @@ class Penanganan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pengaduan_id', 'petugas_id', 'tanggal', 'tindakan', 'hasil', 'status'];
+    protected $fillable = ['pengaduan_id', 'petugas_id', 'biaya_id', 'tanggal', 'tindakan', 'hasil', 'status'];
     protected $table = 'penanganan';
     protected $casts = [
         'tanggal' => 'datetime',
@@ -30,6 +30,14 @@ class Penanganan extends Model
     public function petugas(): BelongsTo
     {
         return $this->belongsTo(Petugas::class);
+    }
+
+    /**
+     * Get the biaya that owns the penanganan.
+     */
+    public function biaya(): BelongsTo
+    {
+        return $this->belongsTo(Biaya::class);
     }
 
     /**

@@ -123,23 +123,54 @@ class LaporanController extends Controller
     /**
      * Display laporan pengaduan page
      */
-    public function pengaduan()
+    public function pengaduan(Request $request)
     {
-        $pengaduan = Pengaduan::with(['pelanggan', 'gangguan'])->orderBy('created_at', 'desc')->get();
-        return view('admin.laporan.pengaduan', compact('pengaduan'));
+        $query = Pengaduan::with(['pelanggan', 'gangguan']);
+
+        if ($request->has('bulan') && $request->has('tahun') && $request->bulan && $request->tahun) {
+            $query->whereMonth('tanggal', $request->bulan)
+                  ->whereYear('tanggal', $request->tahun);
+        } elseif ($request->has('tahun') && $request->tahun) {
+            $query->whereYear('tanggal', $request->tahun);
+        }
+
+        $pengaduan = $query->orderBy('tanggal', 'desc')->get();
+
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        return view('admin.laporan.pengaduan', compact('pengaduan', 'bulan', 'tahun'));
     }
 
     /**
      * Generate PDF for pengaduan laporan
      */
-    public function pengaduanPdf()
+    public function pengaduanPdf(Request $request)
     {
-        $pengaduan = Pengaduan::with(['pelanggan', 'gangguan'])->orderBy('created_at', 'desc')->get();
-        
+        $query = Pengaduan::with(['pelanggan', 'gangguan']);
+
+        if ($request->has('bulan') && $request->has('tahun') && $request->bulan && $request->tahun) {
+            $query->whereMonth('tanggal', $request->bulan)
+                  ->whereYear('tanggal', $request->tahun);
+        } elseif ($request->has('tahun') && $request->tahun) {
+            $query->whereYear('tanggal', $request->tahun);
+        }
+
+        $pengaduan = $query->orderBy('tanggal', 'desc')->get();
+
+        $filterText = '';
+        if ($request->bulan && $request->tahun) {
+            $namaBulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            $filterText = 'Periode: ' . $namaBulan[(int)$request->bulan] . ' ' . $request->tahun;
+        } elseif ($request->tahun) {
+            $filterText = 'Tahun: ' . $request->tahun;
+        }
+
         $pdf = Pdf::loadView('admin.laporan.pdf.pengaduan', [
             'pengaduan' => $pengaduan,
             'title' => 'Laporan Pengaduan',
             'tanggal' => now()->format('d/m/Y H:i:s'),
+            'filterText' => $filterText,
         ]);
         
         $pdf->setPaper('A4', 'landscape');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BiayaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GangguanController;
 use App\Http\Controllers\Admin\LaporanController;
@@ -97,6 +98,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/data/log-aktivitas/{logAktivitas}', [App\Http\Controllers\Admin\LogAktivitasController::class, 'show'])->name('data.log-aktivitas.show');
     Route::delete('/data/log-aktivitas/clear-all', [App\Http\Controllers\Admin\LogAktivitasController::class, 'clearAll'])->name('data.log-aktivitas.clear-all');
     Route::delete('/data/log-aktivitas/clear-old', [App\Http\Controllers\Admin\LogAktivitasController::class, 'clearOld'])->name('data.log-aktivitas.clear-old');
+    // Data Master Routes - Biaya CRUD
+    Route::get('/data/biaya', [BiayaController::class, 'index'])->name('data.biaya');
+    Route::get('/data/biaya/create', [BiayaController::class, 'create'])->name('data.biaya.create');
+    Route::post('/data/biaya', [BiayaController::class, 'store'])->name('data.biaya.store');
+    Route::get('/data/biaya/{biaya}', [BiayaController::class, 'show'])->name('data.biaya.show');
+    Route::get('/data/biaya/{biaya}/edit', [BiayaController::class, 'edit'])->name('data.biaya.edit');
+    Route::put('/data/biaya/{biaya}', [BiayaController::class, 'update'])->name('data.biaya.update');
+    Route::delete('/data/biaya/{biaya}', [BiayaController::class, 'destroy'])->name('data.biaya.destroy');
 
     // Laporan Routes
     Route::get('/laporan/user', [LaporanController::class, 'user'])->name('laporan.user');

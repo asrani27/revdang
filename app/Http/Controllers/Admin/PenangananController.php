@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Penanganan;
 use App\Models\Pengaduan;
 use App\Models\Petugas;
+use App\Models\Biaya;
 use App\Models\LogAktivitas;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,8 @@ class PenangananController extends Controller
     {
         $pengaduan = Pengaduan::orderBy('tanggal', 'desc')->get();
         $petugas = Petugas::orderBy('nama', 'asc')->get();
-        return view('admin.penanganan.create', compact('pengaduan', 'petugas'));
+        $biaya = Biaya::orderBy('nama', 'asc')->get();
+        return view('admin.penanganan.create', compact('pengaduan', 'petugas', 'biaya'));
     }
 
     /**
@@ -62,6 +64,7 @@ class PenangananController extends Controller
         $validated = $request->validate([
             'pengaduan_id' => ['required', 'exists:pengaduan,id'],
             'petugas_id' => ['required', 'exists:petugas,id'],
+            'biaya_id' => ['nullable', 'exists:biaya,id'],
             'tanggal' => ['required', 'date'],
             'tindakan' => ['required', 'string'],
             'hasil' => ['required', 'string'],
@@ -99,7 +102,8 @@ class PenangananController extends Controller
     {
         $pengaduan = Pengaduan::orderBy('tanggal', 'desc')->get();
         $petugas = Petugas::orderBy('nama', 'asc')->get();
-        return view('admin.penanganan.edit', compact('penanganan', 'pengaduan', 'petugas'));
+        $biaya = Biaya::orderBy('nama', 'asc')->get();
+        return view('admin.penanganan.edit', compact('penanganan', 'pengaduan', 'petugas', 'biaya'));
     }
 
     /**
@@ -110,6 +114,7 @@ class PenangananController extends Controller
         $validated = $request->validate([
             'pengaduan_id' => ['required', 'exists:pengaduan,id'],
             'petugas_id' => ['required', 'exists:petugas,id'],
+            'biaya_id' => ['nullable', 'exists:biaya,id'],
             'tanggal' => ['required', 'date'],
             'tindakan' => ['required', 'string'],
             'hasil' => ['required', 'string'],

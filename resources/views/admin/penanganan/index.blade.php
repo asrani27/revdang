@@ -76,6 +76,7 @@
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Pengaduan</th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Petugas</th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Tanggal</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Biaya</th>
                         <th class="px-4 py-3 text-left text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Status</th>
                         <th class="px-4 py-3 text-center text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -106,6 +107,14 @@
                         </td>
                         <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">
                             {{ $p->tanggal->format('d M Y') }}
+                        </td>
+                        <td class="px-4 py-3">
+                            @if($p->biaya)
+                                <span class="text-sm font-medium text-slate-900 dark:text-white">{{ $p->biaya->nama }}</span>
+                                <p class="text-xs text-green-600 dark:text-green-400">Rp {{ number_format($p->biaya->jumlah, 0, ',', '.') }}</p>
+                            @else
+                                <span class="text-sm text-slate-500 dark:text-slate-400">-</span>
+                            @endif
                         </td>
                         <td class="px-4 py-3">
                             <span class="inline-flex px-2.5 py-1 text-xs font-medium rounded-full {{ $p->status_badge_color }}">
@@ -139,7 +148,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
+                        <td colspan="7" class="px-4 py-8 text-center text-slate-500 dark:text-slate-400">
                             <svg class="w-12 h-12 mx-auto mb-3 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>

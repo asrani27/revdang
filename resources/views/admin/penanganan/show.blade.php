@@ -63,6 +63,17 @@
                 </span>
             </div>
 
+            <!-- Biaya -->
+            <div>
+                <label class="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Biaya</label>
+                @if($penanganan->biaya)
+                    <p class="text-slate-900 dark:text-white">{{ $penanganan->biaya->nama }}</p>
+                    <p class="text-sm text-green-600 dark:text-green-400 font-medium">Rp {{ number_format($penanganan->biaya->jumlah, 0, ',', '.') }}</p>
+                @else
+                    <p class="text-slate-500 dark:text-slate-400">-</p>
+                @endif
+            </div>
+
             <!-- Tindakan -->
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Tindakan</label>

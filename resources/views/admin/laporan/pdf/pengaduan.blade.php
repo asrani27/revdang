@@ -99,6 +99,9 @@
             <hr>
             <h3>{{ $title }}</h3>
             <p>Dicetak pada: {{ $tanggal }}</p>
+            @if(isset($filterText) && $filterText)
+            <p><strong>{{ $filterText }}</strong></p>
+            @endif
         </div>
     </div>
 
