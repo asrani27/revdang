@@ -122,7 +122,7 @@
                 <td>{{ $p->pengaduan->gangguan->nama_gangguan ?? '-' }}</td>
                 <td>{{ $p->tanggal ? $p->tanggal->format('d/m/Y') : '-' }}</td>
                 <td>{{ Str::limit($p->tindakan, 40) }}</td>
-                <td>Rp {{ number_format($p->biaya, 0, ',', '.') }}</td>
+                <td>Rp {{ number_format($p->biaya?->jumlah ?? 0, 0, ',', '.') }}</td>
                 <td>{{ ucfirst($p->status) }}</td>
             </tr>
             @empty

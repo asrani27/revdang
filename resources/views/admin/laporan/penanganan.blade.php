@@ -41,7 +41,7 @@
                         <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{{ $p->pengaduan->gangguan->nama_gangguan ?? '-' }}</td>
                         <td class="px-4 py-3 text-sm text-slate-500 dark:text-slate-400">{{ $p->tanggal ? $p->tanggal->format('d/m/Y') : '-' }}</td>
                         <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{{ Str::limit($p->tindakan, 50) }}</td>
-                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">Rp {{ number_format($p->biaya, 0, ',', '.') }}</td>
+                        <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-300">Rp {{ number_format($p->biaya?->jumlah ?? 0, 0, ',', '.') }}</td>
                         <td class="px-4 py-3">
                             <span class="inline-flex px-2.5 py-1 text-xs font-medium rounded-full {{ $p->status === 'selesai' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' }}">
                                 {{ ucfirst($p->status) }}
