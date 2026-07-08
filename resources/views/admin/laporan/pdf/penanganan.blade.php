@@ -138,7 +138,7 @@
     </table>
 
     <div style="margin-top: 4px; text-align: right;">
-        <p>Banjarmasin, {{ \Carbon\Carbon::parse($tanggal)->locale('id')->format('j F Y') }}</p>
+        <p>Banjarmasin, {{ \Carbon\Carbon::now()->locale('id')->format('j F Y') }}</p>
         <p><strong>Pimpinan</strong></p>
         <br><br>
         <p><strong>Yahya</strong></p>
