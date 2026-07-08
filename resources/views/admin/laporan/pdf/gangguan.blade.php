@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>{{ $title }}</title>
     <style>
+        @page {
+            margin: 10px 50px 10px 50px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             font-size: 12px;
-            margin: 20px;
         }
 
         .header {
@@ -127,8 +131,16 @@
         </tbody>
     </table>
 
+    <div style="margin-top: 4px; text-align: right;">
+        <p>Banjarmasin, {{ \Carbon\Carbon::parse($tanggal)->locale('id')->format('j F Y') }}</p>
+        <p><strong>Pimpinan</strong></p>
+        <br><br>
+        <p><strong>Yahya</strong></p>
+    </div>
+
     <div class="footer">
         <p>Total Data: {{ $gangguan->count() }} | Sistem Rev Dang - Laporan {{ $title }}</p>
     </div>
 </body>
+
 </html>
