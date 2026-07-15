@@ -133,8 +133,9 @@
         </tbody>
     </table>
 
-    <div style="margin-top: 4px; text-align: right;">
-        <p>Banjarmasin, {{ \Carbon\Carbon::now()->locale('id')->format('j F Y') }}</p>
+    <div style="margin-top: 4px; margin-left:800px; text-align: center;">
+        <p>Banjarmasin, {{ date('j') }} {{ ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus',
+            'September', 'Oktober', 'November', 'Desember'][date('n')-1] }} {{ date('Y') }}</p>
         <p><strong>Pimpinan</strong></p>
         <br><br>
         <p><strong>Yahya</strong></p>
